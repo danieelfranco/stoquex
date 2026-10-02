@@ -11,7 +11,7 @@
     <h1>{{ equipamento.nome }}</h1>
 
     <p>Número de série: {{ equipamento.numero_serie }}</p>
-    <p>Status: {{ equipamento.status }}</p>
+    <p>Status: {{ equipamento.get_status_display }}</p>
     <p>Data de aquisição: {{ equipamento.data_aquisicao }}</p>
     <p>Responsável: {{ equipamento.responsavel }}</p>
     <p>Setor: {{ equipamento.responsavel.setor }}</p>

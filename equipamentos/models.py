@@ -9,9 +9,15 @@ class Funcionario(models.Model):
         return self.nome
 
 class Equipamento(models.Model) :
+    STATUS_CHOICES = [
+    ('disponivel', 'Disponível'),
+    ('em_uso', 'Em uso'),
+    ('manutencao', 'Em manutenção'),
+    ('baixado', 'Baixado'),
+    ]
     nome = models.CharField(max_length=100)
     numero_serie = models.CharField(max_length=100,unique=True)
-    status = models.CharField(max_length=30)
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='disponivel')
     data_aquisicao = models.DateField(null=True, blank=True)
     responsavel = models.ForeignKey(Funcionario, on_delete=models.SET_NULL, null=True, blank=True)
 

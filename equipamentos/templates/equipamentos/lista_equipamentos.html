@@ -19,7 +19,7 @@
     <tr>
         <td><a href="{% url 'detalhe_equipamento' equipamento.pk %}">{{ equipamento.nome }}</a></td>
         <td>{{ equipamento.numero_serie }}</td>
-        <td>{{ equipamento.status }}</td>
+        <td>{{ equipamento.get_status_display }}</td>
         <td>{{ equipamento.responsavel }}</td>
     </tr>
     {% endfor %}
