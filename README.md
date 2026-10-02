@@ -19,7 +19,7 @@ Sistema de controle de estoque de equipamentos de TI, feito em Django como proje
 1. Clone o repositório e entre na pasta:
 
 ```
-   git clone <url-do-repositorio>
+   git clone https://github.com/danieelfranco/stoquex.git
    cd stoquex
 ```
 
