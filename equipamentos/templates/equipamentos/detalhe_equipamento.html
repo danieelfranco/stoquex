@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhe do equipamento</title>
+</head>
+<a href="{% url 'lista_equipamentos' %}">Voltar</a>
+<a href="{% url 'editar_equipamento' equipamento.pk %}">Editar</a> <a href="{% url 'excluir_equipamento' equipamento.pk %}">Excluir</a>
+<body>
+    <h1>{{ equipamento.nome }}</h1>
+
+    <p>Número de série: {{ equipamento.numero_serie }}</p>
+    <p>Status: {{ equipamento.status }}</p>
+    <p>Data de aquisição: {{ equipamento.data_aquisicao }}</p>
+    <p>Responsável: {{ equipamento.responsavel }}</p>
+    <p>Setor: {{ equipamento.responsavel.setor }}</p>
+    
+</body>
+</html>

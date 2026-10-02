@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excluir equipamento</title>
+</head>
+<body>
+    <h1>Excluir equipamento</h1>
+
+    <p>Tem certeza que deseja excluir <strong>{{ equipamento }}</strong>?</p>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Sim, excluir</button>
+    </form>
+
+    <a href="{% url 'detalhe_equipamento' equipamento.pk %}">Cancelar</a>
+</body>
+</html>

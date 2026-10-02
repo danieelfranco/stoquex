@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+<body>
+    <a href="{% url 'cadastrar_equipamento' %}">+ Novo equipamento</a>
+    <table>
+    <tr>
+        <th>Nome</th>
+        <th>Número de Série</th>
+        <th>Status</th>
+        <th>Responsável</th>
+    </tr>
+
+     {% for equipamento in equipamentos %}
+    <tr>
+        <td><a href="{% url 'detalhe_equipamento' equipamento.pk %}">{{ equipamento.nome }}</a></td>
+        <td>{{ equipamento.numero_serie }}</td>
+        <td>{{ equipamento.status }}</td>
+        <td>{{ equipamento.responsavel }}</td>
+    </tr>
+    {% endfor %}
+    </table>
+    
+</body>
+</html>
