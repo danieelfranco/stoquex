@@ -3,15 +3,37 @@
 {% block title %}Detalhe do equipamento{% endblock %}
 
 {% block content %}
-    <a href="{% url 'lista_equipamentos' %}">Voltar</a>
-    <a href="{% url 'editar_equipamento' equipamento.pk %}">Editar</a>
-    <a href="{% url 'excluir_equipamento' equipamento.pk %}">Excluir</a>
+    <a href="{% url 'lista_equipamentos' %}" class="voltar">← Voltar para a lista</a>
 
-    <h1>{{ equipamento.nome }}</h1>
+    <div class="pagina-topo">
+        <div class="titulo-com-status">
+            <h1>{{ equipamento.nome }}</h1>
+            <span class="status status-{{ equipamento.status }}">{{ equipamento.get_status_display }}</span>
+        </div>
+        <div class="acoes-topo">
+            <a href="{% url 'editar_equipamento' equipamento.pk %}" class="botao botao-secundario">Editar</a>
+            <a href="{% url 'excluir_equipamento' equipamento.pk %}" class="botao botao-perigo">Excluir</a>
+        </div>
+    </div>
 
-    <p>Número de série: {{ equipamento.numero_serie }}</p>
-    <p>Status: {{ equipamento.get_status_display }}</p>
-    <p>Data de aquisição: {{ equipamento.data_aquisicao }}</p>
-    <p>Responsável: {{ equipamento.responsavel }}</p>
-    <p>Setor: {{ equipamento.responsavel.setor }}</p>
+    <div class="cartao">
+        <dl class="detalhes">
+            <div>
+                <dt>Número de série</dt>
+                <dd>{{ equipamento.numero_serie }}</dd>
+            </div>
+            <div>
+                <dt>Data de aquisição</dt>
+                <dd>{{ equipamento.data_aquisicao|date:"d/m/Y"|default:"—" }}</dd>
+            </div>
+            <div>
+                <dt>Responsável</dt>
+                <dd>{{ equipamento.responsavel|default_if_none:"—" }}</dd>
+            </div>
+            <div>
+                <dt>Setor</dt>
+                <dd>{{ equipamento.responsavel.setor|default:"—" }}</dd>
+            </div>
+        </dl>
+    </div>
 {% endblock %}

@@ -3,13 +3,27 @@
 {% block title %}{{ titulo }}{% endblock %}
 
 {% block content %}
-    <h1>{{ titulo }}</h1>
+    <div class="pagina-topo">
+        <h1>{{ titulo }}</h1>
+    </div>
 
-    <form method="post">
+    <form method="post" class="cartao formulario">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Salvar</button>
-    </form>
+        {{ form.non_field_errors }}
 
-    <a href="{% url 'lista_equipamentos' %}">Voltar</a>
+        {% for campo in form %}
+            <div class="campo">
+                <label for="{{ campo.id_for_label }}">{{ campo.label }}</label>
+                {{ campo }}
+                {% for erro in campo.errors %}
+                    <p class="erro">{{ erro }}</p>
+                {% endfor %}
+            </div>
+        {% endfor %}
+
+        <div class="acoes">
+            <a href="{% url 'lista_equipamentos' %}" class="botao botao-secundario">Cancelar</a>
+            <button type="submit" class="botao">Salvar</button>
+        </div>
+    </form>
 {% endblock %}

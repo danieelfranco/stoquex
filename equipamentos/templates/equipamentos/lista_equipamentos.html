@@ -3,7 +3,10 @@
 {% block title %}Equipamentos{% endblock %}
 
 {% block content %}
-    <a href="{% url 'cadastrar_equipamento' %}">+ Novo equipamento</a>
+        <div class="pagina-topo">
+        <h1>Equipamentos</h1>
+        <a href="{% url 'cadastrar_equipamento' %}" class="botao">+ Novo equipamento</a>
+    </div>
     <table>
         <tr>
             <th>Nome</th>
@@ -16,8 +19,8 @@
         <tr>
             <td><a href="{% url 'detalhe_equipamento' equipamento.pk %}">{{ equipamento.nome }}</a></td>
             <td>{{ equipamento.numero_serie }}</td>
-            <td>{{ equipamento.get_status_display }}</td>
-            <td>{{ equipamento.responsavel }}</td>
+            <td><span class="status status-{{ equipamento.status }}">{{ equipamento.get_status_display }}</span></td>
+            <td>{{ equipamento.responsavel|default_if_none:"—" }}</td>
         </tr>
         {% endfor %}
     </table>

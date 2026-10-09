@@ -3,14 +3,19 @@
 {% block title %}Excluir equipamento{% endblock %}
 
 {% block content %}
-    <h1>Excluir equipamento</h1>
+    <div class="pagina-topo">
+        <h1>Excluir equipamento</h1>
+    </div>
 
-    <p>Tem certeza que deseja excluir <strong>{{ equipamento }}</strong>?</p>
-
-    <form method="post">
+    <form method="post" class="cartao confirmacao">
         {% csrf_token %}
-        <button type="submit">Sim, excluir</button>
-    </form>
+        <p>Tem certeza que deseja excluir <strong>{{ equipamento.nome }}</strong>
+           (série {{ equipamento.numero_serie }})?</p>
+        <p class="aviso">Essa ação não pode ser desfeita.</p>
 
-    <a href="{% url 'detalhe_equipamento' equipamento.pk %}">Cancelar</a>
+        <div class="acoes">
+            <a href="{% url 'detalhe_equipamento' equipamento.pk %}" class="botao botao-secundario">Cancelar</a>
+            <button type="submit" class="botao botao-perigo">Sim, excluir</button>
+        </div>
+    </form>
 {% endblock %}
