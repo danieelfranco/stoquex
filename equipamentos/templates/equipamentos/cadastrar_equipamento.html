@@ -1,13 +1,9 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{titulo}}</title>
-</head>
+{% extends 'equipamentos/base.html' %}
 
-<body>
-        <h1>{{titulo}}</h1>
+{% block title %}{{ titulo }}{% endblock %}
+
+{% block content %}
+    <h1>{{ titulo }}</h1>
 
     <form method="post">
         {% csrf_token %}
@@ -16,6 +12,4 @@
     </form>
 
     <a href="{% url 'lista_equipamentos' %}">Voltar</a>
-    
-</body>
-</html>
+{% endblock %}
