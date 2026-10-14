@@ -3,10 +3,38 @@
 {% block title %}Equipamentos{% endblock %}
 
 {% block content %}
-        <div class="pagina-topo">
+    <div class="pagina-topo">
         <h1>Equipamentos</h1>
         <a href="{% url 'cadastrar_equipamento' %}" class="botao">+ Novo equipamento</a>
     </div>
+
+    <div class="resumo">
+        <div class="card-resumo">
+            <span class="card-numero">{{ total }}</span>
+            <span class="card-rotulo">Total</span>
+        </div>
+        {% for item in resumo %}
+        <div class="card-resumo card-{{ item.classe }}">
+            <span class="card-numero">{{ item.total }}</span>
+            <span class="card-rotulo">{{ item.rotulo }}</span>
+        </div>
+        {% endfor %}
+    </div>
+
+    <form method="get" class="filtros">
+        <input type="text" name="q" value="{{ q }}" placeholder="Buscar por nome ou nº de série...">
+        <select name="status">
+            <option value="">Todos os status</option>
+            {% for valor, rotulo in status_choices %}
+                <option value="{{ valor }}" {% if valor == status %}selected{% endif %}>{{ rotulo }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit" class="botao">Filtrar</button>
+        {% if q or status %}
+            <a href="{% url 'lista_equipamentos' %}" class="botao botao-secundario">Limpar</a>
+        {% endif %}
+    </form>
+
     <table>
         <tr>
             <th>Nome</th>
@@ -22,6 +50,22 @@
             <td><span class="status status-{{ equipamento.status }}">{{ equipamento.get_status_display }}</span></td>
             <td>{{ equipamento.responsavel|default_if_none:"—" }}</td>
         </tr>
+        {% empty %}
+        <tr><td colspan="4">Nenhum equipamento encontrado.</td></tr>
         {% endfor %}
     </table>
+
+    {% if equipamentos.paginator.num_pages > 1 %}
+<div class="paginacao">
+    {% if equipamentos.has_previous %}
+        <a href="{% querystring page=equipamentos.previous_page_number %}" class="botao botao-secundario">‹ Anterior</a>
+    {% endif %}
+
+    <span>Página {{ equipamentos.number }} de {{ equipamentos.paginator.num_pages }}</span>
+
+    {% if equipamentos.has_next %}
+        <a href="{% querystring page=equipamentos.next_page_number %}" class="botao botao-secundario">Próxima ›</a>
+    {% endif %}
+</div>
+{% endif %}
 {% endblock %}

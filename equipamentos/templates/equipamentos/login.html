@@ -1,0 +1,29 @@
+{% extends 'equipamentos/base.html' %}
+
+{% block title %}Entrar | Stoquex{% endblock %}
+
+{% block sidebar %}{% endblock %}
+
+{% block content %}
+<div class="login-container">
+    <form method="post" class="cartao login">
+        {% csrf_token %}
+        <h1>Stoquex</h1>
+        <p class="login-subtitulo">Entre para acessar o sistema</p>
+
+        {% for erro in form.non_field_errors %}
+            <div class="mensagem mensagem-error">{{ erro }}</div>
+        {% endfor %}
+
+        {% for campo in form %}
+            <div class="campo">
+                <label for="{{ campo.id_for_label }}">{{ campo.label }}</label>
+                {{ campo }}
+            </div>
+        {% endfor %}
+
+        <input type="hidden" name="next" value="{{ next }}">
+        <button type="submit" class="botao">Entrar</button>
+    </form>
+</div>
+{% endblock %}
