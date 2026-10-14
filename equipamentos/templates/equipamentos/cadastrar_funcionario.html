@@ -1,0 +1,29 @@
+{% extends 'equipamentos/base.html' %}
+
+{% block title %}{{ titulo }}{% endblock %}
+
+{% block content %}
+    <div class="pagina-topo">
+        <h1>{{ titulo }}</h1>
+    </div>
+
+    <form method="post" class="cartao formulario">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+
+        {% for campo in form %}
+            <div class="campo">
+                <label for="{{ campo.id_for_label }}">{{ campo.label }}</label>
+                {{ campo }}
+                {% for erro in campo.errors %}
+                    <p class="erro">{{ erro }}</p>
+                {% endfor %}
+            </div>
+        {% endfor %}
+
+        <div class="acoes">
+            <a href="{% url 'lista_funcionarios' %}" class="botao botao-secundario">Cancelar</a>
+            <button type="submit" class="botao">Salvar</button>
+        </div>
+    </form>
+{% endblock %}

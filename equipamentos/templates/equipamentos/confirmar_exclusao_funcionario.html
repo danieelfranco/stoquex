@@ -1,0 +1,28 @@
+{% extends 'equipamentos/base.html' %}
+
+{% block title %}Excluir funcionário{% endblock %}
+
+{% block content %}
+    <div class="pagina-topo">
+        <h1>Excluir funcionário</h1>
+    </div>
+
+    <form method="post" class="cartao confirmacao">
+        {% csrf_token %}
+        <p>Tem certeza que deseja excluir <strong>{{ funcionario.nome }}</strong>
+           ({{ funcionario.setor }})?</p>
+
+        {% with total=funcionario.equipamento_set.count %}
+            {% if total %}
+                <p>Ele é responsável por {{ total }} equipamento(s). Eles não serão apagados, só ficarão sem responsável.</p>
+            {% endif %}
+        {% endwith %}
+
+        <p class="aviso">Essa ação não pode ser desfeita.</p>
+
+        <div class="acoes">
+            <a href="{% url 'lista_funcionarios' %}" class="botao botao-secundario">Cancelar</a>
+            <button type="submit" class="botao botao-perigo">Sim, excluir</button>
+        </div>
+    </form>
+{% endblock %}

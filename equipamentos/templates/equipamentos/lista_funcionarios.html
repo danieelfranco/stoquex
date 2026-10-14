@@ -1,0 +1,32 @@
+{% extends 'equipamentos/base.html' %}
+
+
+{% block title %}Funcionários{% endblock %}
+
+{% block content %}
+    <div class="pagina-topo">
+        <h1>Funcionários</h1>
+        <a href="{% url 'cadastrar_funcionario' %}" class="botao">+ Novo funcionário</a>
+    </div>
+    <table>
+        <tr>
+            <th>Nome</th>
+            <th>Setor</th>
+            <th>Equipamentos</th>
+            <th>Ações</th>
+        </tr>
+        {% for funcionario in funcionarios %}
+        <tr>
+            <td>{{ funcionario.nome }}</td>
+            <td>{{ funcionario.setor }}</td>
+            <td>{{ funcionario.equipamento_set.count }}</td>
+            <td>
+              <a href="{% url 'editar_funcionario' funcionario.pk %}">Editar</a> ·
+              <a href="{% url 'excluir_funcionario' funcionario.pk %}">Excluir</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="4">Nenhum funcionário cadastrado.</td></tr>
+        {% endfor %}
+    </table>
+{% endblock %}
